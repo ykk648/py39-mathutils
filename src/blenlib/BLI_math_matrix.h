@@ -210,6 +210,7 @@ void scale_m4_fl(float R[4][4], float scale);
 
 float mat3_to_scale(float M[3][3]);
 float mat4_to_scale(float M[4][4]);
+float mat4_to_xy_scale(float M[4][4]);
 
 void size_to_mat3(float R[3][3], const float size[3]);
 void size_to_mat4(float R[4][4], const float size[3]);
@@ -219,7 +220,6 @@ void mat4_to_size(float r[3], float M[4][4]);
 
 void translate_m4(float mat[4][4], float tx, float ty, float tz);
 void rotate_m4(float mat[4][4], const char axis, const float angle);
-void rotate_m2(float mat[2][2], const float angle);
 void transform_pivot_set_m4(float mat[4][4], const float pivot[3]);
 
 void mat3_to_rot_size(float rot[3][3], float size[3], float mat3[3][3]);
