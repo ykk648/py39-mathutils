@@ -97,6 +97,7 @@ header_files = [
     "src/blenlib/BLI_sys_types.h",
     "src/blenlib/BLI_system.h",
     "src/blenlib/BLI_utildefines.h",
+    "src/blenlib/BLI_utildefines_variadic.h",
 
 
     # * mathutils *
@@ -123,12 +124,13 @@ elif compiler_name == "unix":
         "-funsigned-char",
         "-Wno-sign-compare",
         "-Wno-strict-aliasing",
-        ]
+        "-std=gnu99",
+    ]
 
 
 setup(
     name="mathutils",
-    version="2.78",
+    version="2.79",
     maintainer="Campbell Barton",
     maintainer_email="ideasman42@gmail.com",
     url="https://gitlab.com/ideasman42/blender-mathutils",
