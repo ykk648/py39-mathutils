@@ -33,7 +33,7 @@
  *  \brief Read \ref MEMPage
  */
 
-/** 
+/**
  * \page MEMPage Guarded memory(de)allocation
  *
  * \section aboutmem c-style guarded memory allocation
@@ -49,11 +49,11 @@
  *
  * There are currently no known issues with MEM. Note that there is a
  * second intern/ module with MEM_ prefix, for use in c++.
- * 
+ *
  * \subsection memdependencies Dependencies
  * - stdlib
  * - stdio
- * 
+ *
  * \subsection memdocs API Documentation
  * See \ref MEM_guardedalloc.h
  */
@@ -61,6 +61,7 @@
 #ifndef MEM_MALLOCN_H
 #define MEM_MALLOCN_H
 
+#include <stdbool.h> /* needed for bool */
 #include <stdio.h> /* needed for FILE* */
 #include "MEM_sys_types.h" /* needed for uintptr_t */
 
@@ -82,7 +83,7 @@ extern "C" {
 	size_t MEM_allocN_len(void *vmemh) WARN_UNUSED;
 
 	/**
-	 * Release memory previously allocatred by this module. 
+	 * Release memory previously allocatred by this module.
 	 */
 	short MEM_freeN(void *vmemh);
 
@@ -109,23 +110,23 @@ extern "C" {
 	 * memory is cleared. The name must be static, because only a
 	 * pointer to it is stored ! */
 	void *MEM_callocN(size_t len, const char * str) WARN_UNUSED;
-	
+
 	/** Allocate a block of memory of size len, with tag name str. The
 		* name must be a static, because only a pointer to it is stored !
 		* */
 	void *MEM_mallocN(size_t len, const char * str) WARN_UNUSED;
-	
+
 	/** Same as callocN, clears memory and uses mmap (disk cached) if supported.
 		Can be free'd with MEM_freeN as usual.
 		* */
 	void *MEM_mapallocN(size_t len, const char * str) WARN_UNUSED;
 
 	/** Print a list of the names and sizes of all allocated memory
-	 * blocks. as a python dict for easy investigation */ 
+	 * blocks. as a python dict for easy investigation */
 	void MEM_printmemlist_pydict(void);
 
 	/** Print a list of the names and sizes of all allocated memory
-	 * blocks. */ 
+	 * blocks. */
 	void MEM_printmemlist(void);
 
 	/** calls the function on all allocated memory blocks. */
@@ -133,7 +134,7 @@ extern "C" {
 
 	/** Print statistics about memory usage */
 	void MEM_printmemlist_stats(void);
-	
+
 	/** Set the callback function for error output. */
 	void MEM_set_error_callback(void (*func)(const char *));
 
@@ -146,7 +147,7 @@ extern "C" {
 	/** Set thread locking functions for safe memory allocation from multiple
 	    threads, pass NULL pointers to disable thread locking again. */
 	void MEM_set_lock_callback(void (*lock)(void), void (*unlock)(void));
-	
+
 	/** Attempt to enforce OSX (or other OS's) to have malloc and stack nonzero */
 	void MEM_set_memory_debug(void);
 
@@ -168,10 +169,9 @@ extern "C" {
 #ifndef NDEBUG
 const char *MEM_name_ptr(void *vmemh);
 #endif
-	
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

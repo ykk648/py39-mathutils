@@ -33,6 +33,7 @@
 #include "BLI_utildefines.h"
 
 #include "../generic/python_utildefines.h"
+#include "../generic/py_capi_utils.h"
 
 #ifndef MATH_STANDALONE
 #  include "BLI_string.h"
@@ -1945,8 +1946,9 @@ static PyObject *Matrix_copy(MatrixObject *self)
 }
 static PyObject *Matrix_deepcopy(MatrixObject *self, PyObject *args)
 {
-	if (!mathutils_deepcopy_args_check(args))
+	if (!PyC_CheckArgs_DeepCopy(args)) {
 		return NULL;
+	}
 	return Matrix_copy(self);
 }
 
@@ -2590,7 +2592,7 @@ static int Matrix_translation_set(MatrixObject *self, PyObject *value, void *UNU
 }
 
 PyDoc_STRVAR(Matrix_row_doc,
-"Access the matix by rows (default), (read-only).\n\n:type: Matrix Access"
+"Access the matrix by rows (default), (read-only).\n\n:type: Matrix Access"
 );
 static PyObject *Matrix_row_get(MatrixObject *self, void *UNUSED(closure))
 {
@@ -2598,7 +2600,7 @@ static PyObject *Matrix_row_get(MatrixObject *self, void *UNUSED(closure))
 }
 
 PyDoc_STRVAR(Matrix_col_doc,
-"Access the matix by colums, 3x3 and 4x4 only, (read-only).\n\n:type: Matrix Access"
+"Access the matrix by columns, 3x3 and 4x4 only, (read-only).\n\n:type: Matrix Access"
 );
 static PyObject *Matrix_col_get(MatrixObject *self, void *UNUSED(closure))
 {
@@ -2768,7 +2770,7 @@ PyDoc_STRVAR(matrix_doc,
 "   matrices from 2x2 up to 4x4.\n"
 "\n"
 "   :param rows: Sequence of rows.\n"
-"      When ommitted, a 4x4 identity matrix is constructed.\n"
+"      When omitted, a 4x4 identity matrix is constructed.\n"
 "   :type rows: 2d number sequence\n"
 );
 PyTypeObject matrix_Type = {

@@ -91,17 +91,22 @@ add_library(stubs_lib ${SRC})
 
 add_definitions(-DMATH_STANDALONE)
 
-set(SRC
-	src/blenlib/intern/math_base.c
+set(SRC_INLINE
 	src/blenlib/intern/math_base_inline.c
 	src/blenlib/intern/math_bits_inline.c
+	src/blenlib/intern/math_geom_inline.c
+	src/blenlib/intern/math_vector_inline.c
+)
+
+set(SRC
+	${SRC_INLINE}
+	src/blenlib/intern/string.c
+	src/blenlib/intern/math_base.c
 	src/blenlib/intern/math_color.c
 	src/blenlib/intern/math_geom.c
-	src/blenlib/intern/math_geom_inline.c
 	src/blenlib/intern/math_matrix.c
 	src/blenlib/intern/math_rotation.c
 	src/blenlib/intern/math_vector.c
-	src/blenlib/intern/math_vector_inline.c
 
 	src/blenlib/BLI_compiler_attrs.h
 	src/blenlib/BLI_compiler_compat.h
@@ -118,10 +123,13 @@ set(SRC
 	src/blenlib/BLI_math_rotation.h
 	src/blenlib/BLI_math_solvers.h
 	src/blenlib/BLI_math_vector.h
+	src/blenlib/BLI_string.h
 	src/blenlib/BLI_strict_flags.h
 	src/blenlib/BLI_sys_types.h
 	src/blenlib/BLI_utildefines.h
 )
+set_source_files_properties(${SRC_INLINE} PROPERTIES HEADER_FILE_ONLY 1)
+unset(SRC_INLINE)
 
 include_directories(
 	src/blenlib
@@ -133,7 +141,6 @@ include_directories(
 )
 
 add_library(blenlib_lib ${SRC})
-
 
 # -----------------------------------------------------------------------------
 # mathutils
@@ -197,7 +204,7 @@ if(WIN32)
 		mathutils_module
 		PROPERTIES
 		SUFFIX ".pyd"
-	)	
+	)
 endif()
 
 # link

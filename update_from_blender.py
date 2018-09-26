@@ -63,6 +63,7 @@ files_mathutils = (
 files_blenlib_level = 2
 files_blenlib_dest = "src"
 files_blenlib = (
+    "source/blender/blenlib/BLI_assert.h",
     "source/blender/blenlib/BLI_compiler_attrs.h",
     "source/blender/blenlib/BLI_compiler_compat.h",
     "source/blender/blenlib/BLI_compiler_typecheck.h",
@@ -81,13 +82,14 @@ files_blenlib = (
     "source/blender/blenlib/BLI_math_statistics.h",
     "source/blender/blenlib/BLI_math_vector.h",
     "source/blender/blenlib/BLI_strict_flags.h",
+    "source/blender/blenlib/BLI_string.h",
     "source/blender/blenlib/BLI_sys_types.h",
     "source/blender/blenlib/BLI_system.h",
     "source/blender/blenlib/BLI_utildefines.h",
     "source/blender/blenlib/BLI_utildefines_variadic.h",
     "source/blender/blenlib/intern/math_base.c",
-    "source/blender/blenlib/intern/math_bits_inline.c",
     "source/blender/blenlib/intern/math_base_inline.c",
+    "source/blender/blenlib/intern/math_bits_inline.c",
     "source/blender/blenlib/intern/math_color.c",
     "source/blender/blenlib/intern/math_color_blend_inline.c",
     "source/blender/blenlib/intern/math_color_inline.c",
@@ -98,6 +100,7 @@ files_blenlib = (
     "source/blender/blenlib/intern/math_rotation.c",
     "source/blender/blenlib/intern/math_vector.c",
     "source/blender/blenlib/intern/math_vector_inline.c",
+    "source/blender/blenlib/intern/string.c",
     )
 
 
@@ -114,4 +117,3 @@ files_pygeneric = (
 update_source(files_mathutils, files_mathutils_dest, files_mathutils_level)
 update_source(files_blenlib, files_blenlib_dest, files_blenlib_level)
 update_source(files_pygeneric, files_pygeneric_dest, files_pygeneric_level)
-

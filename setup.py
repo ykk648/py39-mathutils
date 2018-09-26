@@ -43,16 +43,12 @@ source_files = [
 
     # * blenlib *
     "src/blenlib/intern/math_base.c",
-    "src/blenlib/intern/math_base_inline.c",
-    "src/blenlib/intern/math_bits_inline.c",
     "src/blenlib/intern/math_color.c",
-    "src/blenlib/intern/math_color_inline.c",
     "src/blenlib/intern/math_geom.c",
-    "src/blenlib/intern/math_geom_inline.c",
     "src/blenlib/intern/math_matrix.c",
     "src/blenlib/intern/math_rotation.c",
     "src/blenlib/intern/math_vector.c",
-    "src/blenlib/intern/math_vector_inline.c",
+    "src/blenlib/intern/string.c",
 
     # * mathutils *
     "src/mathutils/mathutils.c",
@@ -76,6 +72,13 @@ header_files = [
     "src/stubs/MEM_sys_types.h",
 
     # * blenlib *
+    "src/blenlib/intern/math_base_inline.c",
+    "src/blenlib/intern/math_bits_inline.c",
+    "src/blenlib/intern/math_color_inline.c",
+    "src/blenlib/intern/math_geom_inline.c",
+    "src/blenlib/intern/math_vector_inline.c",
+
+    "src/blenlib/BLI_assert.h",
     "src/blenlib/BLI_compiler_attrs.h",
     "src/blenlib/BLI_compiler_compat.h",
     "src/blenlib/BLI_dynstr.h",
@@ -94,11 +97,11 @@ header_files = [
     "src/blenlib/BLI_memarena.h",
     "src/blenlib/BLI_mempool.h",
     "src/blenlib/BLI_strict_flags.h",
+    "src/blenlib/BLI_string.h",
     "src/blenlib/BLI_sys_types.h",
     "src/blenlib/BLI_system.h",
     "src/blenlib/BLI_utildefines.h",
     "src/blenlib/BLI_utildefines_variadic.h",
-
 
     # * mathutils *
     "src/mathutils/mathutils.h",
@@ -130,7 +133,7 @@ elif compiler_name == "unix":
 
 setup(
     name="mathutils",
-    version="2.79",
+    version="2.79.2",
     maintainer="Campbell Barton",
     maintainer_email="ideasman42@gmail.com",
     url="https://gitlab.com/ideasman42/blender-mathutils",
