@@ -82,7 +82,6 @@ files_blenlib = (
     "source/blender/blenlib/BLI_math_statistics.h",
     "source/blender/blenlib/BLI_math_vector.h",
     "source/blender/blenlib/BLI_strict_flags.h",
-    "source/blender/blenlib/BLI_string.h",
     "source/blender/blenlib/BLI_sys_types.h",
     "source/blender/blenlib/BLI_system.h",
     "source/blender/blenlib/BLI_utildefines.h",
@@ -100,7 +99,13 @@ files_blenlib = (
     "source/blender/blenlib/intern/math_rotation.c",
     "source/blender/blenlib/intern/math_vector.c",
     "source/blender/blenlib/intern/math_vector_inline.c",
-    "source/blender/blenlib/intern/string.c",
+    )
+
+# strip "source/blender"
+files_makesdna_level = 2
+files_makesdna_dest = "src"
+files_makesdna = (
+    "source/blender/makesdna/DNA_vec_types.h",
     )
 
 
@@ -116,4 +121,5 @@ files_pygeneric = (
 
 update_source(files_mathutils, files_mathutils_dest, files_mathutils_level)
 update_source(files_blenlib, files_blenlib_dest, files_blenlib_level)
+update_source(files_makesdna, files_makesdna_dest, files_makesdna_level)
 update_source(files_pygeneric, files_pygeneric_dest, files_pygeneric_level)

@@ -85,7 +85,7 @@ extern "C" {
 	/**
 	 * Release memory previously allocatred by this module.
 	 */
-	short MEM_freeN(void *vmemh);
+	void MEM_freeN(void *vmemh);
 
 
 	/**

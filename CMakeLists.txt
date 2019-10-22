@@ -1,4 +1,6 @@
 
+project(mathutils)
+
 # avoid having empty buildtype
 set(CMAKE_BUILD_TYPE_INIT Release)
 
@@ -100,7 +102,6 @@ set(SRC_INLINE
 
 set(SRC
 	${SRC_INLINE}
-	src/blenlib/intern/string.c
 	src/blenlib/intern/math_base.c
 	src/blenlib/intern/math_color.c
 	src/blenlib/intern/math_geom.c
@@ -123,20 +124,23 @@ set(SRC
 	src/blenlib/BLI_math_rotation.h
 	src/blenlib/BLI_math_solvers.h
 	src/blenlib/BLI_math_vector.h
-	src/blenlib/BLI_string.h
 	src/blenlib/BLI_strict_flags.h
 	src/blenlib/BLI_sys_types.h
 	src/blenlib/BLI_utildefines.h
+
+  # DNA (deps)
+  src/makesdna/DNA_vec_types.h
 )
 set_source_files_properties(${SRC_INLINE} PROPERTIES HEADER_FILE_ONLY 1)
 unset(SRC_INLINE)
 
 include_directories(
 	src/blenlib
+	src/makesdna
 )
 
 include_directories(
-    SYSTEM
+	SYSTEM
 	${PYTHON_INCLUDE_DIRS}
 )
 

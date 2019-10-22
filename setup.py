@@ -35,6 +35,7 @@ to the blender repository is used so the source never gets out of sync.
 include_dirs = [
     "src/stubs",
     "src/blenlib",
+    "src/makesdna",
     ]
 
 source_files = [
@@ -48,7 +49,6 @@ source_files = [
     "src/blenlib/intern/math_matrix.c",
     "src/blenlib/intern/math_rotation.c",
     "src/blenlib/intern/math_vector.c",
-    "src/blenlib/intern/string.c",
 
     # * mathutils *
     "src/mathutils/mathutils.c",
@@ -97,11 +97,13 @@ header_files = [
     "src/blenlib/BLI_memarena.h",
     "src/blenlib/BLI_mempool.h",
     "src/blenlib/BLI_strict_flags.h",
-    "src/blenlib/BLI_string.h",
     "src/blenlib/BLI_sys_types.h",
     "src/blenlib/BLI_system.h",
     "src/blenlib/BLI_utildefines.h",
     "src/blenlib/BLI_utildefines_variadic.h",
+
+    # * DNA *
+    "src/makesdna/DNA_vec_types.h",
 
     # * mathutils *
     "src/mathutils/mathutils.h",
@@ -133,7 +135,7 @@ elif compiler_name == "unix":
 
 setup(
     name="mathutils",
-    version="2.79.2",
+    version="2.81.2",
     maintainer="Campbell Barton",
     maintainer_email="ideasman42@gmail.com",
     url="https://gitlab.com/ideasman42/blender-mathutils",
