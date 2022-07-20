@@ -96,10 +96,10 @@ static PyObject *Vector_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
   return Vector_CreatePyObject_alloc(vec, size, type);
 }
 
-static PyObject *vec__apply_to_copy(PyNoArgsFunction vec_func, VectorObject *self)
+static PyObject *vec__apply_to_copy(PyCFunction vec_func, VectorObject *self)
 {
   PyObject *ret = Vector_copy(self);
-  PyObject *ret_dummy = vec_func(ret);
+  PyObject *ret_dummy = vec_func(ret, NULL);
   if (ret_dummy) {
     Py_DECREF(ret_dummy);
     return (PyObject *)ret;
@@ -355,7 +355,7 @@ PyDoc_STRVAR(Vector_normalize_doc,
              "\n"
              "   .. note:: Normalize works for vectors of all sizes,\n"
              "      however 4D Vectors w axis is left untouched.\n");
-static PyObject *Vector_normalize(VectorObject *self)
+static PyObject *Vector_normalize(VectorObject *self, PyObject *args_dmy)
 {
   int size = (self->size == 4 ? 3 : self->size);
   if (BaseMath_ReadCallback_ForWrite(self) == -1) {
@@ -376,7 +376,7 @@ PyDoc_STRVAR(Vector_normalized_doc,
              "   :rtype: :class:`Vector`\n");
 static PyObject *Vector_normalized(VectorObject *self)
 {
-  return vec__apply_to_copy((PyNoArgsFunction)Vector_normalize, self);
+  return vec__apply_to_copy((PyCFunction)Vector_normalize, self);
 }
 
 PyDoc_STRVAR(Vector_resize_doc,

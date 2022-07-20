@@ -42,7 +42,7 @@ static PyObject *Matrix_copy_notest(MatrixObject *self, const float *matrix);
 static PyObject *Matrix_copy(MatrixObject *self);
 static PyObject *Matrix_deepcopy(MatrixObject *self, PyObject *args);
 static int Matrix_ass_slice(MatrixObject *self, int begin, int end, PyObject *value);
-static PyObject *matrix__apply_to_copy(PyNoArgsFunction matrix_func, MatrixObject *self);
+static PyObject *matrix__apply_to_copy(PyCFunction matrix_func, MatrixObject *self);
 static PyObject *MatrixAccess_CreatePyObject(MatrixObject *matrix, const eMatrixAccess_t type);
 
 static int matrix_row_vector_check(MatrixObject *mat, VectorObject *vec, int row)
@@ -395,11 +395,11 @@ static PyObject *Matrix_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
   return NULL;
 }
 
-static PyObject *matrix__apply_to_copy(PyNoArgsFunction matrix_func, MatrixObject *self)
+static PyObject *matrix__apply_to_copy(PyCFunction matrix_func, MatrixObject *self)
 {
   PyObject *ret = Matrix_copy(self);
   if (ret) {
-    PyObject *ret_dummy = matrix_func(ret);
+    PyObject *ret_dummy = matrix_func(ret, NULL);
     if (ret_dummy) {
       Py_DECREF(ret_dummy);
       return (PyObject *)ret;
@@ -1672,7 +1672,7 @@ PyDoc_STRVAR(
     "\n"
     "   .. seealso:: `Adjugate matrix <https://en.wikipedia.org/wiki/Adjugate_matrix>` on "
     "Wikipedia.\n");
-static PyObject *Matrix_adjugate(MatrixObject *self)
+static PyObject *Matrix_adjugate(MatrixObject *self, PyObject *args_dmy)
 {
   if (BaseMath_ReadCallback_ForWrite(self) == -1) {
     return NULL;
@@ -1711,7 +1711,7 @@ PyDoc_STRVAR(
     "   .. note:: When the matrix cant be adjugated a :exc:`ValueError` exception is raised.\n");
 static PyObject *Matrix_adjugated(MatrixObject *self)
 {
-  return matrix__apply_to_copy((PyNoArgsFunction)Matrix_adjugate, self);
+  return matrix__apply_to_copy((PyCFunction)Matrix_adjugate, self);
 }
 
 PyDoc_STRVAR(
@@ -1881,7 +1881,7 @@ PyDoc_STRVAR(
     "   Set the matrix to its transpose.\n"
     "\n"
     "   .. seealso:: `Transpose <https://en.wikipedia.org/wiki/Transpose>` on Wikipedia.\n");
-static PyObject *Matrix_transpose(MatrixObject *self)
+static PyObject *Matrix_transpose(MatrixObject *self, PyObject *args_dmy)
 {
   if (BaseMath_ReadCallback_ForWrite(self) == -1) {
     return NULL;
@@ -1919,7 +1919,7 @@ PyDoc_STRVAR(Matrix_transposed_doc,
              "   :rtype: :class:`Matrix`\n");
 static PyObject *Matrix_transposed(MatrixObject *self)
 {
-  return matrix__apply_to_copy((PyNoArgsFunction)Matrix_transpose, self);
+  return matrix__apply_to_copy((PyCFunction)Matrix_transpose, self);
 }
 
 /*---------------------------matrix.normalize() ------------------*/
@@ -1927,7 +1927,7 @@ PyDoc_STRVAR(Matrix_normalize_doc,
              ".. method:: normalize()\n"
              "\n"
              "   Normalize each of the matrix columns.\n");
-static PyObject *Matrix_normalize(MatrixObject *self)
+static PyObject *Matrix_normalize(MatrixObject *self, PyObject *args_dmy)
 {
   if (BaseMath_ReadCallback_ForWrite(self) == -1) {
     return NULL;
@@ -1965,7 +1965,7 @@ PyDoc_STRVAR(Matrix_normalized_doc,
              "   :rtype: :class:`Matrix`\n");
 static PyObject *Matrix_normalized(MatrixObject *self)
 {
-  return matrix__apply_to_copy((PyNoArgsFunction)Matrix_normalize, self);
+  return matrix__apply_to_copy((PyCFunction)Matrix_normalize, self);
 }
 
 /*---------------------------matrix.zero() -----------------------*/
